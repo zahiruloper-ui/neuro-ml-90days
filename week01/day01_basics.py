@@ -2,8 +2,11 @@ print("Day 1 ready")
 import math  # for math.sqrt [web:134]
 
 def mean(xs):
-    # TODO
-    pass
+    if len(xs) == 0:  # len returns number of items 
+        raise ValueError("mean() requires atleast one value") # raise throws an error, 
+                                                              # ValueError is a type of error when type is 
+                                                              # okay but value is not okay
+    return sum(xs)/len(xs) # sum returns the sum of all items
 
 def std(xs):
     # Population standard deviation: sqrt(mean((x - mu)^2))
