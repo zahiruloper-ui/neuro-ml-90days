@@ -5,13 +5,16 @@ def mean(xs):
     if len(xs) == 0:  # len returns number of items 
         raise ValueError("mean() requires atleast one value") # raise throws an error, 
                                                               # ValueError is a type of error when type is 
-                                                              # okay but value is not okay
+                                                             # okay but value is not okay
     return sum(xs)/len(xs) # sum returns the sum of all items
 
 def std(xs):
     # Population standard deviation: sqrt(mean((x - mu)^2))
-    # TODO
-    pass
+    if len(xs) == 0:  # len returns number of items 
+        raise ValueError("std() requires atleast one value") 
+    mu = mean(xs)
+    var = sum((x - mu) ** 2 for x in xs) / len(xs)
+    return math.sqrt(var)
 
 def minmax_scale(xs):
     # Scale to [0, 1]. If all values equal, return all 0.0
