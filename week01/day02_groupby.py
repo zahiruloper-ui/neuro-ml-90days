@@ -51,3 +51,35 @@ print("out3\n", out3, "\n")
 print("out1a\n", out1a, "\n")
 print("out2a\n", out2a, "\n")
 print("out3a\n", out3a, "\n")
+
+
+
+
+
+out4 = (
+    df.groupby("city")
+      .agg(
+          min_price=pd.NamedAgg(column="price", aggfunc="min"),
+          max_price=pd.NamedAgg(column="price", aggfunc="max"),
+          avg_price=pd.NamedAgg(column="price", aggfunc="mean"),
+          total_qty=pd.NamedAgg(column="qty", aggfunc="sum"),
+      )
+      .reset_index()
+)
+
+#pd.NamedAgg allows you to choose column, choose agg, rename output column at the same time
+# reset index makes the index column
+
+
+out4a = (df1.groupby("city").agg(
+    max_price = pd.NamedAgg(column='price', aggfunc='max'),
+    min_price = pd.NamedAgg(column='price', aggfunc='min'),
+    avg_price = pd.NamedAgg(column= 'price', aggfunc='mean'),
+    total_qty = pd.NamedAgg(column='qty', aggfunc='sum'))
+    
+)
+
+
+print(out4)
+print(out4a)
+print(list(out4.columns))    # list() produces a list
