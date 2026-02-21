@@ -1,8 +1,0 @@
-# Day 2 Notes
-- concat stacks data (same columns) to add more rows; ignore_index=True gives a fresh 0..n-1 index.
-- pd.merge(               # call Pandas merge function to join two DataFrames
-    df1,         # left DataFrame (keep all rows from this one)
-    df2,          # right DataFrame (bring matching columns from this one)
-    on="col_name",   # column used as the matching key in both tables
-    how="left"          # left join: keep all rows from orders_all, fill missing matches with NaN
-
