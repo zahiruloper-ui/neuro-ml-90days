@@ -27,3 +27,22 @@ Q: Why do we raise ValueError on empty input? A: for not doing calculation on in
 Q: What is min–max scaling? A: to convert values in the [0,1] scale
 
 Q: What does math.sqrt(x) return? A: square root of a value
+
+
+Day 2:
+
+Q: What does groupby do in pandas? A: Split data into groups by key(s) and let you summarize each group
+​
+Q: What does agg do after groupby? A: Applies agg functions (like min/max/mean/sum per group
+
+Q: Why does groupby("city") often make city disappear as a column? A: Because the group key becomes the index by default
+​
+Q: What does reset_index() do after a groupby? A: Turns the index (group keys) back into a normal column and resets to 0,1,2... index
+​
+Q: Why use pd.NamedAgg? A: To give clean names to aggregated columns (avoid messy multi-level column names)​
+
+Q: What is concat used for? A: Stack DataFrames together (often add more rows)
+​
+Q: What is merge used for? A: Join two DataFrames on a key column (like SQL join)
+​
+Q: In a left merge, what happens when there is no matching key? A: The left row stays, and the new right-side columns become NaN
