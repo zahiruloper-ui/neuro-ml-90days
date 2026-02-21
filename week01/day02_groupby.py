@@ -81,5 +81,79 @@ out4a = (df1.groupby("city").agg(
 
 
 print(out4)
-print(out4a)
+
 print(list(out4.columns))    # list() produces a list
+
+print(out4a)
+
+
+
+customers = pd.DataFrame({
+    "customer_id": [1, 2, 3],
+    "name": ["Ana", "Bilal", "Chen"],
+    "city": ["Vancouver", "Surrey", "Burnaby"],
+})
+
+customers1 = pd.DataFrame(
+    {"cust_id" : [3, 6, 7],
+     "name" : ['Nicky', 'Justin', 'Chen'],
+     "city": ['Myanmar', 'China', 'Canada']
+})
+
+orders_2025 = pd.DataFrame({
+    "order_id": [101, 102],
+    "customer_id": [1, 2],
+    "total": [35.5, 18.0],
+})
+
+orders_2025_1 = pd.DataFrame(
+    {
+        'order_id': [121, 10],
+        'cust_id': [7, 6],
+        'total': [7.89, 8.89]
+    }
+)
+
+orders_2026 = pd.DataFrame({
+    "order_id": [201, 202, 203],
+    "customer_id": [2, 3, 999],  # 999 doesn't exist in customers (intentional)
+    "total": [22.0, 44.0, 10.0],
+})
+
+orders_2026_1 = pd.DataFrame(
+    {
+        'order_id': [12, 10, 89],
+        'cust_id': [3, 7, 999],
+        'total': [78.9, 80.89, 90.0]
+    }
+)
+
+# concat stacks rows (same columns)
+orders_all = pd.concat([orders_2025, orders_2026], ignore_index=True)
+
+#concat present all of the rows from two or more data frames\
+# ignore_index = TRUE helps to make the index uniform,
+# otherwise it will again start from 0 from next df
+
+orders_all_1 = pd.concat([orders_2026_1, orders_2025_1], ignore_index=True)
+
+# merge joins on keys (like SQL). Left join keeps all rows from orders_all.
+orders_enriched = pd.merge(orders_all,           #left Df (keep all rows from this one)
+                            customers,           #right Df (bring matching columns from this one)
+                              on="customer_id",  # column used as the matching key in both tables
+                                how="left")      # left join: keep all rows from orders_all,
+                                                 # fill missing matches with NaN
+
+orders_enriched1 = pd.merge(orders_all_1, customers1, on = 'cust_id'
+                            , how = 'left')
+
+print("orders_all shape:", orders_all.shape)  #shape tells the size of the table matrix (rows,cols)
+print(orders_all, "\n")
+
+print("orders_enriched shape:", orders_enriched.shape)
+print(orders_enriched, "\n")
+
+print(orders_all_1, "\n")
+print(orders_enriched1)
+
+
