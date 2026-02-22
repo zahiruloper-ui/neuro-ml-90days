@@ -15,7 +15,7 @@
 5) Q: What is a training/validation split?
    A: Split data into training (fit the model) and validation (evaluate/tune on unseen data) so you can estimate generalization and avoid overfitting (more knowledge needed)
 
-Day 1:
+## Day 1:
 
 Q: What does len(xs) return? A: number of items
 
@@ -29,20 +29,47 @@ Q: What is min–max scaling? A: to convert values in the [0,1] scale
 Q: What does math.sqrt(x) return? A: square root of a value
 
 
-Day 2:
+## Day 2:
 
 Q: What does groupby do in pandas? A: Split data into groups by key(s) and let you summarize each group
+
 ​
 Q: What does agg do after groupby? A: Applies agg functions (like min/max/mean/sum per group
 
 Q: Why does groupby("city") often make city disappear as a column? A: Because the group key becomes the index by default
+
 ​
 Q: What does reset_index() do after a groupby? A: Turns the index (group keys) back into a normal column and resets to 0,1,2... index
+
 ​
 Q: Why use pd.NamedAgg? A: To give clean names to aggregated columns (avoid messy multi-level column names)​
 
 Q: What is concat used for? A: Stack DataFrames together (often add more rows)
 ​
 Q: What is merge used for? A: Join two DataFrames on a key column (like SQL join)
+
 ​
 Q: In a left merge, what happens when there is no matching key? A: The left row stays, and the new right-side columns become NaN
+
+## Day 3:
+
+Q: What does df.isna().sum() return?
+A: Missing-value counts per column.
+
+Q: How do you get percent missing per column?
+A: (df.isna().mean() * 100).
+
+Q: What does df.fillna({...}) do?
+A: Fills NA/NaN using per-column values (dict keys are column names).
+​
+
+Q: What does df.dropna(subset=["colA","colB"]) do?
+A: Drops rows where colA or colB is missing.
+​
+
+Q: What’s the purpose of df.info() during EDA?
+A: Quick check of dtypes + non-null counts per column.
+​
+
+Q: In describe(include="all"), what do top and freq mean?
+A: Most common value and its count (for non-numeric/categorical columns)
