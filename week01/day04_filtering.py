@@ -85,3 +85,6 @@ df_nan.loc[2, "score"] = np.nan
 
 print ("\n nan sorting \n", df_nan.sort_values(by= "score"))  #default is to put nan values is last
 print (df_nan.sort_values(by= "score", na_position= "first"))
+
+
+
