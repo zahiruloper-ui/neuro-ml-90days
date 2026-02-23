@@ -60,3 +60,28 @@ print(df.iat[0, 1])       # iat uses index of col instead of str
 
 df.loc[df['score'].isna(), 'score'] = 0   # putting value in place of na (editing)
 print(df)
+
+
+# sorting
+
+print(df.sort_values(by='score'))    # sort_values(by = colname) sort according to ascending order (default)
+print(df.sort_values(by='city'))      # works for both string(alphabetical A to Z), 
+print(df.sort_values(by='passed'))    # int(ascending). and boolean (False to True) 
+
+# For descending order, ascending = False
+
+print(df.sort_values(by='score', ascending=False))    # sort_values(by = colname) sort according to ascending order (default)
+print(df.sort_values(by='city', ascending=False))      # works for both string(alphabetical Z to A), 
+print(df.sort_values(by='passed', ascending=False))   # int(descending). and boolean (True to False) 
+
+
+# multiple sorting
+
+print("\n multiple sorting: \n", df.sort_values(by=['city', 'score'], ascending=[True, False])) 
+
+
+df_nan = df.copy()
+df_nan.loc[2, "score"] = np.nan
+
+print ("\n nan sorting \n", df_nan.sort_values(by= "score"))  #default is to put nan values is last
+print (df_nan.sort_values(by= "score", na_position= "first"))
