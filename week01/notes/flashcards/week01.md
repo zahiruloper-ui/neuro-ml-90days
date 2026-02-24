@@ -73,3 +73,28 @@ A: Quick check of dtypes + non-null counts per column.
 
 Q: In describe(include="all"), what do top and freq mean?
 A: Most common value and its count (for non-numeric/categorical columns)
+
+## Day 4
+Q: In pandas, why do we use & / | instead of and / or when combining conditions? 
+​
+A: Because pandas conditions are Series; &/| do elementwise boolean logic, while and/or don’t work with Series.
+
+Q: What does df["col"].isin(["A","B"]) return?
+​
+A: A boolean Series mask: True where col is in the list, else False.
+
+Q: .loc[0:3] returns which rows when index is 0..n?
+​
+A: Rows with labels 0,1,2,3 (stop label included).
+
+Q: .iloc[0:3] returns which rows?
+​
+A: Row positions 0,1,2 (stop excluded).
+
+Q: How do you control where NaNs appear when sorting?
+​
+A: Use na_position="first" or na_position="last" in sort_values().
+
+Q: What does DataFrame.apply(func, axis=1) pass into func?
+​
+A: Each row as a Series (index = column names).
