@@ -98,3 +98,24 @@ A: Use na_position="first" or na_position="last" in sort_values().
 Q: What does DataFrame.apply(func, axis=1) pass into func?
 ​
 A: Each row as a Series (index = column names).
+
+## Day 5
+
+Q: What does `df.groupby("city")["score"].mean()` return?
+A: A Series with city as the index and the mean score per city as values.
+
+Q: What is the difference between `as_index=False` and `.reset_index()` after groupby?
+A: Both produce the same result — the group key becomes a regular column instead of the index. `as_index=False` is set at groupby time; `.reset_index()` is chained after aggregation.
+
+Q: How do you run multiple aggregations (count, mean, min, max) on a grouped column?
+A: `df.groupby("col")["val"].agg(['count','mean','min','max'])` — returns a DataFrame with one column per function.
+
+Q: What type of index does a multi-key groupby produce?
+A: A MultiIndex (hierarchical index) with one level per groupby key.
+
+Q: What does `df.pivot_table(values="score", index="city", columns="dept", aggfunc="mean")` do?
+A: Creates a cross-tab grid where rows = unique cities, columns = unique depts, and cells = mean score. Missing combos are NaN.
+
+Q: How do you fill missing combinations in a pivot table?
+A: Pass `fill_value=0` (or any value) to `pivot_table()` — it replaces NaN for city/dept combos that don't exist in the data.
+
