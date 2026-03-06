@@ -119,3 +119,22 @@ A: Creates a cross-tab grid where rows = unique cities, columns = unique depts, 
 Q: How do you fill missing combinations in a pivot table?
 A: Pass `fill_value=0` (or any value) to `pivot_table()` — it replaces NaN for city/dept combos that don't exist in the data.
 
+## Day 06
+Q: What do the "All" row and column represent in pivot_table(margins=True)?
+A: "All" row = column averages across index values. "All" column = row averages across column values.
+
+Q: What's the default aggregation in pd.crosstab()?
+A: Count of occurrences for each combination of row_var and col_var.
+
+Q: `pd.crosstab(df["city"], df["dept"], normalize='index')` shows what?
+A: Row proportions — what % of each city's records fall into each dept (each row sums to 1).
+
+Q: In df.apply(func, axis=1), what does the function receive as input?
+A: A Series representing one row (use row["col"] to access column values).
+
+Q: When should you use .apply(axis=1) instead of vectorized operations?
+A: For complex row logic involving multiple columns, strings, or conditions that np.where can't handle.
+
+Q: True/False: pivot_table(margins=True) replaces NaN cells with averages.
+A: False — NaN stays NaN; margins only affect the "All" row/column.
+
