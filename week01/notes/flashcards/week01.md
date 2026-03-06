@@ -138,3 +138,22 @@ A: For complex row logic involving multiple columns, strings, or conditions that
 Q: True/False: pivot_table(margins=True) replaces NaN cells with averages.
 A: False — NaN stays NaN; margins only affect the "All" row/column.
 
+## Day 7
+Q: What does df["col"].str.split(" ", expand=True) return?
+A: A DataFrame where each column is one split part.
+
+Q: In .str.extract(r'^(\w+)'), what do parentheses do?
+A: They create a capture group — only the matched content inside () becomes the new column.
+
+Q: How do you ignore case in .str.contains()?
+A: Pass `case=False`.
+
+Q: `r',.*'` regex matches what?
+A: A comma followed by any characters (including none) till end of string.
+
+Q: True/False: .str methods work on numeric columns.
+A: False — only string Series. Convert with .astype(str) first.
+
+Q: What's faster: chained .str.replace() or .apply() with if/else?
+A: .str.replace() — vectorized and optimized for strings.
+
