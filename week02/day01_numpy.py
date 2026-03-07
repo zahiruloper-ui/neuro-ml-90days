@@ -87,7 +87,7 @@ b = np.array([10, 20, 30, 40])
 print("a + b:", a + b)
 print("b - a:", b - a)
 print("b * a:", b * a)
-print("b / a:", b / a)
+print("b / a:", b / a)        # division always make float
 print("a ** 2", a ** 2)
 
 #Array + Scalar (broadcasts scalar to every element)
@@ -116,3 +116,43 @@ print("Mean:", c.mean())
 print("Max:", c.max())
 print("Min:", c.min())
 print("Std:", c.std().round(4))
+
+
+# Basic Indexing
+
+# 1D indexing
+a = np.array([10, 20, 30, 40, 50])
+
+print("a[0]:", a[0])          # first element
+print("a[4]:", a[4])          
+print("a[-1]:", a[-1])        # last (negative index)
+print("a[-2]:", a[-2])        # second last 
+
+# Slicing 1D: [start:stop:step]  — stop is EXCLUDED
+print("\na[1:4]:", a[1:4])     
+print("a[:3]:", a[:3])         # [10 20 30]
+print("a[2:]:", a[2:])         # [30 40 50]
+print("a[::2]:", a[::2])       # [10 30 50] — every 2nd
+print("a[::-1]:", a[::-1])     # [50 40 30 20 10] — reversed!
+
+
+# ── 2D indexing  [row, col] ───────────────────────────────────
+m = np.array([[1,  2,  3,  4],
+              [5,  6,  7,  8],
+              [9, 10, 11, 12]])
+
+print("\nm[0, 0]:", m[0, 0])   # 1   — top-left
+print("m[2, 3]:", m[2, 3])     # 12  — bottom-right
+print("m[-1, -1]:", m[-1, -1]) # 12  — same, with negatives
+print("m[1, 2]:", m[1, 2])     # 7
+
+# Slicing 2D
+# use , to [row, col]
+print("\nm[0, :]:", m[0, :])   # [1 2 3 4]     — full row 0
+print("m[:, 1]:", m[:, 1])     # [2 6 10]      — full col 1
+print("m[0:2, 1:3]:\n", m[0:2, 1:3])  # 2×2 submatrix
+print("m[:, -1]:", m[:, -1])   # [4 8 12]      — last column
+
+
+
+
