@@ -1,4 +1,4 @@
-# Day 9 — NumPy Indexing & Slicing
+# Day 2 — NumPy Indexing & Slicing
 
 ## 1D Slicing
 - Syntax: `arr[start:stop:step]` — stop is exclusive
