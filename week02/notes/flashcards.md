@@ -30,10 +30,46 @@
 **Q:** What does `arr[arr > 10] = 0` do?
 **A:** Boolean mask assignment — sets every element greater than 10 to 0 in-place. This modifies the original array.
 
-**Q:** What is the difference between `matrix[[0,2], [1,3]]` and `matrix[np.ix_([0,2], [1,3])]`?
+## What is the difference between `matrix[[0,2], [1,3]]` and `matrix[np.ix_([0,2], [1,3])]`?
 **A:** `[[0,2],[1,3]]` pairs indices element-wise → returns `[matrix[0,1], matrix[2,3]]` (1D, 2 values). `np.ix_` selects a full 2×2 submatrix at rows 0,2 × cols 1,3.
 
-**Q:** Does a basic slice return a view or a copy? How do you verify?
-**A:** A view — it shares memory with the original. Verify with `result.base` — returns the source array (not `None`) if it's a view.
+##  Does a basic slice return a view or a copy? How do you verify?
+ A view — it shares memory with the original. Verify with `result.base` — returns the source array (not `None`) if it's a view.
+
+
+
+## What is a NumPy ufunc?
+A function that operates element-wise on arrays using compiled C code —
+no Python loop needed, typically 100–300× faster.
+
+---
+
+## What does `np.where(x > 0, x, 0)` do?
+Returns `x` where `x > 0`, and `0` elsewhere —
+this is the ReLU activation function.
+
+---
+
+## Why do we `np.clip(probs, 1e-7, 1-1e-7)` before computing log-loss?
+Because `np.log(0) = -inf` and `np.log(1-1) = -inf` —
+clipping prevents a numerical crash.
+
+---
+
+## What does `np.argmax(batch, axis=1)` return for a shape `(3, 4)` array?
+A shape `(3,)` array — the index of the highest value in each row,
+i.e. the predicted class per sample.
+
+---
+
+## What is the softmax formula in NumPy?
+`softmax = np.exp(scores) / np.exp(scores).sum()`
+Converts raw logits to probabilities that sum to 1.0.
+
+---
+
+## What is the axis rule for 2D aggregation?
+`axis=0` collapses rows → result shape is `(cols,)`
+`axis=1` collapses columns → result shape is `(rows,)`
 
 
