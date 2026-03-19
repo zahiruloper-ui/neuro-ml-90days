@@ -83,5 +83,24 @@ Scalar
 ##  Forward pass shape flow?  
  `X(b,4)@W(4,3)+b(3)→y(b,3)`
 
+## What does np.random.seed(42) guarantee?
+ Same random sequence every run with seed=42
+
+## randint(1,6,3) generates what range? 
+ Integers [1,6) → 1,2,3,4,5
+
+## rand(3,4).shape returns?
+ (3,4) - 2D array of uniform [0,1) values
+
+## shuffle() vs permutation() difference?
+ shuffle() in-place, permutation() returns copy
+
+## Typical neural net weight init?
+## normal(0, 0.01, (input_size, output_size))
+
+## Create fake binary classification dataset (1 line each):
+ X = normal(0,1,1000); y = (X > 0).astype(int)
+
+
 
 
