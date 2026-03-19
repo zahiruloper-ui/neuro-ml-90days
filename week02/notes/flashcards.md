@@ -96,7 +96,7 @@ Scalar
  shuffle() in-place, permutation() returns copy
 
 ## Typical neural net weight init?
-## normal(0, 0.01, (input_size, output_size))
+ normal(0, 0.01, (input_size, output_size))
 
 ## Create fake binary classification dataset (1 line each):
  X = normal(0,1,1000); y = (X > 0).astype(int)
