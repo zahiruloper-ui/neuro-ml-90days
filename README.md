@@ -1,7 +1,3 @@
-Got it—I'll keep every word exactly the same and only add Markdown structure.
-
-***
-
 # The 90-day roadmap (13 weeks)
 
 ## Week 1 — Python-for-ML boot
