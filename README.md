@@ -8,26 +8,26 @@ go from R-learner to Python beginner who can load/clean data reliably.Deliverabl
 
 - D1: Python basics (variables, functions, lists/dicts) + 15 tiny exercises.
 
-D2: NumPy arrays + broadcasting (just enough).
+- D2: NumPy arrays + broadcasting (just enough).
 
-D3: pandas load → inspect → clean (missing values, types).
+- D3: pandas load → inspect → clean (missing values, types).
 
-D4: plotting (hist, scatter, boxplot).
+- D4: plotting (hist, scatter, boxplot).
 
-D5: write 10 flashcards (“What is a DataFrame?”, “What is leakage?” etc.).
+- D5: write 10 flashcards (“What is a DataFrame?”, “What is leakage?” etc.).
 
-D6: split train/valid; make a baseline (mean/median or majority class).
+- D6: split train/valid; make a baseline (mean/median or majority class).
 
-D7: quiz + README (dataset description + target variable idea).
+- D7: quiz + README (dataset description + target variable idea).
 
-Week 2 — Problem framing (neuro style)
-You’ll practice framing: desired outcome, model output type, success metrics (distinct from model metrics).
+## Week 2 — Problem framing (neuro style)
+- You’ll practice framing: desired outcome, model output type, success metrics (distinct from model metrics).
 
-Deliverable: 1-page “Problem Framing Doc” for a neuroscience mini project.
+- Deliverable: 1-page “Problem Framing Doc” for a neuroscience mini project.
 
-Daily tasks:
+- Daily tasks:
 
-D1: pick one neuro question (examples: classify sleep stage, predict reaction time, detect seizure segments).
+### D1: pick one neuro question (examples: classify sleep stage, predict reaction time, detect seizure segments).
 
 D2: define inputs/labels; identify leakage risks.
 
