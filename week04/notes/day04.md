@@ -1,85 +1,76 @@
-# Week 4 Day 3 — Handling Imbalance
+# Week 4 Day 4 — Calibration and Reliability Curves
 
 ## What I learned
 
-Today I learned about **class imbalance** and how to handle it with:
-- class weights
-- oversampling
+Today I learned about **calibration**, which checks whether a model’s predicted probabilities match reality.
 
-Class imbalance means one class appears much more often than the other in the dataset.
+A calibrated model should behave like this:
+- if it predicts 0.8, then about 80% of those cases should really be positive
+- if it predicts 0.2, then about 20% of those cases should really be positive
 
-My Parkinson’s dataset is actually imbalanced in the opposite direction from what I expected:
-- Parkinson’s (1) is the majority class
-- Healthy (0) is the minority class
+This matters because in classification, I do not only care about the class label.  
+I also care about whether the probability is trustworthy.
 
-## Class weights
+## Predicted probabilities
 
-Class weights are used to tell the model that some classes should matter more during training.
+I used `model.predict_proba(X_valid)[:, 1]` to get the predicted probability of class 1.
 
-In scikit-learn, `class_weight='balanced'` automatically sets weights using the formula:
+The `[:, 1]` part means:
+- take all rows
+- select column 1
+- keep only the probability for the positive class
 
-\[
-\text{weight}_i = \frac{n\_samples}{n\_classes \times \text{count of class } i}
-\]
+## Calibration curve
 
-This makes the minority class have a higher weight, so mistakes on that class hurt the loss more.
+I used `calibration_curve(y_valid, probs, n_bins=10)` to create a reliability diagram.
 
-I tested:
-- plain logistic regression (no class weights)
-- balanced logistic regression (`class_weight='balanced'`)
+This function compares:
+- average predicted probability in each bin
+- actual fraction of positives in that bin
 
-Results:
-- plain model: precision=0.900, recall=0.931
-- balanced model: precision=0.913, recall=0.724
+If the curve is close to the diagonal line, the model is well calibrated.
 
-Balanced model increased precision but reduced recall.
+## My probability summary
 
-## Oversampling
+I found:
+- min probability = 0.107
+- max probability = 0.999
+- mean probability = 0.714
 
-Oversampling means duplicating some samples from the minority class so that the dataset becomes more balanced.
+That means the model is often confident and gives high predicted probabilities.
 
-I did:
-1. find indices of minority class in training set
-2. randomly duplicate some of them
-3. add them back to the training set
+## Zigzag curve
 
-After oversampling, my model got:
-- precision=0.913, recall=0.724
+My calibration plot looked zigzag.
 
-This was similar to the balanced model.
+This probably happened because:
+- the validation set is small
+- some bins have very few samples
+- some probability ranges are crowded while others are sparse
 
-## Comparison
-
-| Method     | Precision | Recall |
-|------------|-----------|--------|
-| Plain      | 0.900     | 0.931  |
-| Balanced   | 0.913     | 0.724  |
-| Oversampled| 0.913     | 0.724  |
-
-For medical screening, I want **high recall**, so the **plain model** is better here.
+Using fewer bins, like `n_bins=5`, should make the curve smoother and easier to interpret.
 
 ## Important concepts
 
-### Class imbalance
-Class imbalance means one class has many more samples than the other.
+### Calibration
+Calibration means the predicted probabilities match the real-world outcome frequencies.
 
-### Class weights
-Class weights change how much the model “care” about mistakes on each class.
+### Reliability diagram
+A reliability diagram is a plot that shows whether a classifier’s probabilities are trustworthy.
 
-### Oversampling
-Oversampling increases the number of minority class samples by duplicating them.
+### Underconfident
+A model is underconfident when its probabilities are too low compared to reality.
 
-### Why this matters
-In medical detection, missing real patients is often worse than false alarms. So recall is often more important than precision.
+### Overconfident
+A model is overconfident when its probabilities are too high compared to reality.
 
 ## Files created
-- `week04/day03_imbalance.py`
-- `notes/week04_day03.md`
+- `week04/day04_calibration.py`
+- `week04/calibration_curve.png`
+- `week04/calibration_curve_5bins.png`
+- `notes/week04_day04.md`
 
 ## Next step
-Next I will learn about calibration and reliability curves.
-
-
-
+Next I will learn about the most important classification metrics in flashcard form and continue with the next Day 4 task if needed.
 
 
