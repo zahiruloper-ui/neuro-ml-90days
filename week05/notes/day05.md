@@ -1,51 +1,67 @@
-# Week 5 Day 4 — Validate: Cross-Validation Basics
+# Week 5 Day 5 — Recall: Bagging vs Boosting, Overfitting Signs
 
-## Why cross-validation matters
+## Bagging vs Boosting (key differences)
 
-With a single train/test split:
-- You get **one accuracy number** (e.g., test = 1.0).
-- That number depends heavily on how you split the data.
-- If you split differently, accuracy might change.
-- Can be misleading (e.g., all models get 1.0 by chance).
+### Bagging (Random Forest)
+- Trees trained **in parallel**.
+- Each tree sees a **random subset of data** (bootstrap sample).
+- Predictions combined by **voting** (classification) or **averaging** (regression).
+- Main goal: reduce **variance**.
+- More stable, less likely to overfit.
 
-With cross-validation (e.g., 5-fold):
-- Data is split into **5 equal parts** (folds).
-- Train on 4 folds, test on 1 fold.
-- Repeat 5 times, each fold used as test once.
-- Average the 5 accuracy numbers.
+### Boosting (Gradient Boosting)
+- Trees trained **sequentially** (one after another).
+- Each new tree tries to **fix the errors** of the previous trees.
+- Focuses on samples that were mispredicted.
+- Predictions combined as a **weighted sum**.
+- Main goal: reduce **error/loss**.
+- Can be very accurate but more sensitive to overfitting.
 
-Benefits:
-- More **reliable** estimate of model performance.
-- Less dependent on one random split.
-- Better for comparing models fairly.
-- Shows variability (standard deviation).
+## Overfitting signs in trees and ensembles
 
-## Cross-validation vs single split on Iris
+### In a single decision tree:
+- Train accuracy ≈ 1.0, test accuracy < 1.0.
+- Large difference: train - test > 0.1.
+- Very deep tree (e.g., max_depth=None) with many tiny branches.
+- Tree memorizes noise instead of learning general patterns.
 
-### Single train/test split (80/20):
-- Logistic Regression: test = 1.0
-- Decision Tree: train = 0.9583, test = 1.0
-- Random Forest: train = 1.0, test = 1.0
-- Gradient Boosting: train = 1.0, test = 1.0
+### In Random Forest:
+- Less likely to overfit because of averaging.
+- But if n_estimators is very large and trees are very deep, can still overfit slightly.
 
-All models got 100% test accuracy → no clear winner.
+### In Gradient Boosting:
+- More likely to overfit if:
+  - Too many trees (n_estimators).
+  - Trees are too deep (max_depth).
+  - Learning rate is too high.
+- Overfitting shows as:
+  - Train accuracy ≈ 1.0, test accuracy lower.
+  - Performance drops on new data.
 
-### Cross-validation (5-fold):
-- Logistic Regression: **0.9733** (+/- 0.0249)
-- Decision Tree: **0.9733** (+/- 0.0249)
-- Random Forest: **0.9667** (+/- 0.0211)
-- Gradient Boosting: **0.9600** (+/- 0.0327)
+## Week 5 summary: Trees & Ensembles
 
-Now we see small differences:
-- Logistic Regression and Decision Tree are slightly better.
-- Random Forest and Boosting are slightly lower.
-- CV reveals differences that a single split hid.
+### Models you compared:
+1. **Logistic Regression** (linear baseline).
+2. **Decision Tree** (single tree, splits on features).
+3. **Random Forest** (bagging, many trees, reduces variance).
+4. **Gradient Boosting** (boosting, sequential trees, reduces loss).
 
-## Why cross-validation is more reliable than single split
+### On Iris dataset:
+- Single train/test split: all got 100% test accuracy.
+- Cross-validation (5-fold):
+  - Logistic Regression: 0.9733
+  - Decision Tree: 0.9733
+  - Random Forest: 0.9667
+  - Gradient Boosting: 0.9600
 
-- A single split gives one accuracy number that depends heavily on that one random split.
-- Cross-validation gives 5 accuracy numbers from 5 different splits, and we average them.
-- Because it uses multiple splits, it’s less dependent on one particular random split.
-- This helps us compare models more fairly and get a more stable estimate of performance.
+### Key intuitions:
+- Trees split to make groups more pure.
+- Trees can overfit if too deep.
+- Forest reduces variance via bagging (parallel trees).
+- Boosting reduces loss via sequential error correction.
+- Cross-validation gives more reliable comparison.
 
- 
+
+
+
+
