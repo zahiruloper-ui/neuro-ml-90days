@@ -18,8 +18,6 @@ from eeg_pipeline import (
 )
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-
-
 from day2_config import (
     SEED,
     DATA_PATH,
@@ -33,9 +31,7 @@ from day2_config import (
 )
 
 
-def main():
-    print(f"=== Run {RUN_ID} ===")
-
+def main() -> dict:
     data_cfg = DatasetConfig(
         csv_path=DATA_PATH,
         window_size=WINDOW_SIZE,
@@ -53,13 +49,8 @@ def main():
     )
 
     X_raw, y_raw = load_eeg_dataset(data_cfg)
-    print(f"X_raw shape: {X_raw.shape}")
-
     Xw, yw = create_sliding_windows(X_raw, y_raw, data_cfg.window_size, data_cfg.step)
-    print(f"Total windows: {len(Xw)}")
-
     X_features = extract_features(Xw)
-    print(f"Feature matrix shape: {X_features.shape}")
 
     block_idx = make_block_indices(len(Xw), split_cfg.n_blocks)
     splits = blocked_time_splits(len(Xw), block_idx, split_cfg.buffer)
@@ -67,9 +58,25 @@ def main():
     results = run_blocked_cv(X_features, yw, splits, model_cfg)
     rf_acc, rf_bal, mlp_acc, mlp_bal = summarize_results(results)
 
-    print(f"RF  mean acc={rf_acc:.3f}, mean bal_acc={rf_bal:.3f}")
-    print(f"MLP mean acc={mlp_acc:.3f}, mean bal_acc={mlp_bal:.3f}")
+    return {
+        "run_id": RUN_ID,
+        "seed": SEED,
+        "window_size": WINDOW_SIZE,
+        "step": STEP,
+        "n_blocks": N_BLOCKS,
+        "buffer": BUFFER,
+        "rf_params": RF_PARAMS,
+        "mlp_params": MLP_PARAMS,
+        "n_windows": len(Xw),
+        "rf_acc": round(rf_acc, 4),
+        "rf_bal_acc": round(rf_bal, 4),
+        "mlp_acc": round(mlp_acc, 4),
+        "mlp_bal_acc": round(mlp_bal, 4),
+    }
 
 
 if __name__ == "__main__":
-    main()
+    result = main()
+    print(f"=== Run {result['run_id']} ===")
+    for key, value in result.items():
+        print(f"{key}: {value}")
