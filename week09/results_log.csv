@@ -1,0 +1,7 @@
+run_id,seed,window_size,step,n_blocks,buffer,rf_params,mlp_params,n_windows,rf_acc,rf_bal_acc,mlp_acc,mlp_bal_acc
+20260928_224721,42,128,64,5,1,"{'n_estimators': 200, 'max_depth': None, 'random_state': 42}","{'hidden_layer_sizes': (64, 32), 'activation': 'tanh', 'max_iter': 500, 'random_state': 42}",233,0.4596,0.5179,0.3907,0.4781
+20260928_224829,42,192,64,5,1,"{'n_estimators': 200, 'max_depth': None, 'random_state': 42}","{'hidden_layer_sizes': (64, 32), 'activation': 'tanh', 'max_iter': 500, 'random_state': 42}",232,0.4603,0.5879,0.3485,0.4058
+20260928_224924,42,256,64,5,1,"{'n_estimators': 200, 'max_depth': None, 'random_state': 42}","{'hidden_layer_sizes': (64, 32), 'activation': 'tanh', 'max_iter': 500, 'random_state': 42}",231,0.4408,0.507,0.3455,0.4801
+20260928_225100,42,320,64,5,1,"{'n_estimators': 200, 'max_depth': None, 'random_state': 42}","{'hidden_layer_sizes': (64, 32), 'activation': 'tanh', 'max_iter': 500, 'random_state': 42}",230,0.4348,0.5245,0.3435,0.4784
+20260928_225132,42,384,64,5,1,"{'n_estimators': 200, 'max_depth': None, 'random_state': 42}","{'hidden_layer_sizes': (64, 32), 'activation': 'tanh', 'max_iter': 500, 'random_state': 42}",229,0.4238,0.5723,0.3049,0.4596
+20260928_225209,42,448,64,5,1,"{'n_estimators': 200, 'max_depth': None, 'random_state': 42}","{'hidden_layer_sizes': (64, 32), 'activation': 'tanh', 'max_iter': 500, 'random_state': 42}",228,0.4035,0.565,0.2843,0.421

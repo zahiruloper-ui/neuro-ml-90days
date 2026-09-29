@@ -1,5 +1,6 @@
 import urllib.request
 from pathlib import Path
+
 import pandas as pd
 
 URL = "https://raw.githubusercontent.com/datasets/eeg-eye-state/main/data/eeg-eye-state.csv"
@@ -24,13 +25,11 @@ if __name__ == "__main__":
 
 from datetime import datetime
 
-from datetime import datetime
-
 SEED = 42
 
 DATA_PATH = "week09/data/eeg-eye-state.csv"
 
-WINDOW_SIZE = 128
+WINDOW_SIZE = 448
 STEP = 64
 
 N_BLOCKS = 5
@@ -49,7 +48,7 @@ MLP_PARAMS = {
     "random_state": SEED,
 }
 
-RUN_ID = datetime.now().strftime("%Y%m%d_%H%M%S")
+RUN_ID = datetime.now().strftime("%Y%m%d_%H%M%S")  # noqa: DTZ005
 
 if __name__ == "__main__":
     print(f"RUN_ID: {RUN_ID}")

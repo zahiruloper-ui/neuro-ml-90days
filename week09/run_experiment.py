@@ -1,34 +1,66 @@
+import csv
+import os
 import sys
 from pathlib import Path
+
+import pandas as pd
 
 WEEK8_DIR = Path(__file__).resolve().parent.parent / "week08"
 sys.path.insert(0, str(WEEK8_DIR))
 
-from eeg_pipeline import (
+from eeg_pipeline import (  # type: ignore
     DatasetConfig,
-    SplitConfig,
     ModelConfig,
-    load_eeg_dataset,
+    SplitConfig,
+    blocked_time_splits,
     create_sliding_windows,
     extract_features,
+    load_eeg_dataset,
     make_block_indices,
-    blocked_time_splits,
     run_blocked_cv,
     summarize_results,
 )
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from day2_config import (
-    SEED,
-    DATA_PATH,
-    WINDOW_SIZE,
-    STEP,
-    N_BLOCKS,
+from config import (
     BUFFER,
-    RF_PARAMS,
+    DATA_PATH,
     MLP_PARAMS,
+    N_BLOCKS,
+    RF_PARAMS,
     RUN_ID,
+    SEED,
+    STEP,
+    WINDOW_SIZE,
 )
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def log_result(result, log_path=None):
+    if log_path is None:
+        log_path = os.path.join(SCRIPT_DIR, "results_log.csv")
+    file_exists = os.path.isfile(log_path)
+    row = {
+        "run_id": result["run_id"],
+        "seed": result["seed"],
+        "window_size": result["window_size"],
+        "step": result["step"],
+        "n_blocks": result["n_blocks"],
+        "buffer": result["buffer"],
+        "rf_params": str(result["rf_params"]),
+        "mlp_params": str(result["mlp_params"]),
+        "n_windows": result["n_windows"],
+        "rf_acc": result["rf_acc"],
+        "rf_bal_acc": result["rf_bal_acc"],
+        "mlp_acc": result["mlp_acc"],
+        "mlp_bal_acc": result["mlp_bal_acc"],
+    }
+    with open(log_path, "a", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=row.keys())
+        if not file_exists:
+            writer.writeheader()
+        writer.writerow(row)
 
 
 def main() -> dict:
@@ -77,6 +109,8 @@ def main() -> dict:
 
 if __name__ == "__main__":
     result = main()
-    print(f"=== Run {result['run_id']} ===")
+    log_result(result)
+    df = pd.read_csv(os.path.join(SCRIPT_DIR, "results_log.csv"))
+    print(df.to_string(index=False))
     for key, value in result.items():
         print(f"{key}: {value}")

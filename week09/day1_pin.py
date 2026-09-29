@@ -1,7 +1,8 @@
-import sys
 import platform
 import subprocess
+import sys
 from pathlib import Path
+
 
 def main():
     out_dir = Path("week09")
@@ -18,7 +19,7 @@ def main():
             [sys.executable, "-m", "pip", "--version"], text=True
         ).strip()
         info_lines.append(f"Pip version: {pip_version}")
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         info_lines.append(f"Pip version: could not detect ({e})")
 
     content = "\n".join(info_lines)

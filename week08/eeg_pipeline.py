@@ -10,16 +10,14 @@ This module centralizes:
 
 from __future__ import annotations
 
+from dataclasses import dataclass
+
 import numpy as np
 import pandas as pd
-from dataclasses import dataclass
-from typing import List, Tuple
-
-from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, balanced_accuracy_score, confusion_matrix
-
+from sklearn.neural_network import MLPClassifier
+from sklearn.preprocessing import StandardScaler
 
 WINDOW_SIZE_DEFAULT = 128
 STEP_DEFAULT = 64
@@ -43,7 +41,7 @@ class ModelConfig:
     rf_n_estimators: int = 200
     rf_max_depth: int | None = None
     rf_random_state: int = 42
-    mlp_hidden: Tuple[int, ...] = (64, 32)
+    mlp_hidden: tuple[int, ...] = (64, 32)
     mlp_activation: str = "tanh"
     mlp_max_iter: int = 500
     mlp_random_state: int = 42
@@ -60,7 +58,7 @@ class FoldResult:
     mlp_cm: np.ndarray
 
 
-def load_eeg_dataset(cfg: DatasetConfig) -> Tuple[np.ndarray, np.ndarray]:
+def load_eeg_dataset(cfg: DatasetConfig) -> tuple[np.ndarray, np.ndarray]:
     """Load EEG Eye State CSV and return (X_raw, y_raw)."""
     df = pd.read_csv(cfg.csv_path)
     label_col = "eyeDetection" if "eyeDetection" in df.columns else df.columns[-1]
@@ -74,7 +72,7 @@ def create_sliding_windows(
     y: np.ndarray,
     window_size: int = WINDOW_SIZE_DEFAULT,
     step: int = STEP_DEFAULT,
-) -> Tuple[np.ndarray, np.ndarray]:
+) -> tuple[np.ndarray, np.ndarray]:
     """Create sliding windows and majority labels per window."""
     Xw, yw = [], []
     for start in range(0, len(X) - window_size + 1, step):
@@ -89,7 +87,7 @@ def extract_features(Xw: np.ndarray) -> np.ndarray:
     return np.hstack([Xw.mean(axis=1), Xw.std(axis=1)])
 
 
-def make_block_indices(n_windows: int, n_blocks: int) -> List[np.ndarray]:
+def make_block_indices(n_windows: int, n_blocks: int) -> list[np.ndarray]:
     """Return list of contiguous window index blocks for blocked CV."""
     indices = np.arange(n_windows)
     return list(np.array_split(indices, n_blocks))
@@ -97,11 +95,11 @@ def make_block_indices(n_windows: int, n_blocks: int) -> List[np.ndarray]:
 
 def blocked_time_splits(
     n_windows: int,
-    block_indices: List[np.ndarray],
+    block_indices: list[np.ndarray],
     buffer: int,
-) -> List[Tuple[np.ndarray, np.ndarray]]:
+) -> list[tuple[np.ndarray, np.ndarray]]:
     """Return (train_idx, test_idx) pairs for blocked CV with buffer."""
-    splits: List[Tuple[np.ndarray, np.ndarray]] = []
+    splits: list[tuple[np.ndarray, np.ndarray]] = []
     all_idx = np.arange(n_windows)
     for b in block_indices:
         min_t, max_t = b[0], b[-1]
@@ -112,7 +110,7 @@ def blocked_time_splits(
     return splits
 
 
-def build_models(cfg: ModelConfig) -> Tuple[RandomForestClassifier, MLPClassifier]:
+def build_models(cfg: ModelConfig) -> tuple[RandomForestClassifier, MLPClassifier]:
     """Instantiate RF and MLP according to ModelConfig."""
     rf = RandomForestClassifier(
         n_estimators=cfg.rf_n_estimators,
@@ -132,12 +130,12 @@ def build_models(cfg: ModelConfig) -> Tuple[RandomForestClassifier, MLPClassifie
 def run_blocked_cv(
     X_features: np.ndarray,
     y_windows: np.ndarray,
-    splits: List[Tuple[np.ndarray, np.ndarray]],
+    splits: list[tuple[np.ndarray, np.ndarray]],
     cfg: ModelConfig,
-) -> List[FoldResult]:
+) -> list[FoldResult]:
     """Run RF and MLP across blocked splits and return per-fold results."""
     rf, mlp = build_models(cfg)
-    results: List[FoldResult] = []
+    results: list[FoldResult] = []
 
     for fold, (train_idx, test_idx) in enumerate(splits):
         X_train, y_train = X_features[train_idx], y_windows[train_idx]
@@ -176,7 +174,7 @@ def run_blocked_cv(
     return results
 
 
-def summarize_results(results: List[FoldResult]) -> Tuple[float, float, float, float]:
+def summarize_results(results: list[FoldResult]) -> tuple[float, float, float, float]:
     """Return mean accuracies and balanced accuracies for RF and MLP."""
     rf_accs = [r.rf_acc for r in results]
     rf_bals = [r.rf_bal_acc for r in results]
