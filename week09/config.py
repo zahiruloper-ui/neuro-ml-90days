@@ -29,7 +29,7 @@ SEED = 42
 
 DATA_PATH = "week09/data/eeg-eye-state.csv"
 
-WINDOW_SIZE = 448
+WINDOW_SIZE = 128
 STEP = 64
 
 N_BLOCKS = 5

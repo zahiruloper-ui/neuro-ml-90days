@@ -20,10 +20,10 @@ This repo documents real progress, not a fixed schedule: some weeks move faster,
 | 4 | Classification + metrics | Mini-Project #2: binary classifier w/ threshold tuning | ✅ Done |
 | 5 | Trees & ensembles | Linear vs Random Forest vs Gradient Boosting comparison | ✅ Done |
 | 6 | Unsupervised learning | Clustering + PCA notebook with biological interpretation | ✅ Done |
-| 7 | Time-series basics | Mini-Project #3: windowed signal classification/regression | 🔄 In Progress |
-| 8 | Intro neural nets | Small MLP vs best tree model comparison | ⬜ Planned |
-| 9 | Mini MLOps | Reproducible run: pinned deps + experiment log | ⬜ Planned |
-| 10 | Embeddings | Semantic search over neuroscience abstracts | ⬜ Planned |
+| 7 | Time-series basics | Mini-Project #3: windowed signal classification/regression | ✅ Done|
+| 8 | Intro neural nets | Small MLP vs best tree model comparison | ✅ Done |
+| 9 | Mini MLOps | Reproducible run: pinned deps + experiment log | ✅ Done |
+| 10 | Embeddings | Semantic search over neuroscience abstracts | 🔄 In Progress |
 | 11 | Deployment | Mini-Project #4 (optional): Streamlit/Gradio demo app | ⬜ Planned |
 | 12 | Mastery review | Improve one prior project significantly | ⬜ Planned |
 | 13 | Capstone planning | Capstone proposal + dataset shortlist | ⬜ Planned |
