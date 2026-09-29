@@ -1,6 +1,7 @@
 import csv
 import os
 import sys
+from datetime import datetime
 from pathlib import Path
 
 import pandas as pd
@@ -28,7 +29,6 @@ from config import (
     MLP_PARAMS,
     N_BLOCKS,
     RF_PARAMS,
-    RUN_ID,
     SEED,
     STEP,
     WINDOW_SIZE,
@@ -37,7 +37,8 @@ from config import (
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
-def log_result(result, log_path=None):
+def log_result(result: dict[str, object], log_path: str | None = None) -> None:
+    """Append one experiment result row to the CSV log file."""
     if log_path is None:
         log_path = os.path.join(SCRIPT_DIR, "results_log.csv")
     file_exists = os.path.isfile(log_path)
@@ -63,13 +64,16 @@ def log_result(result, log_path=None):
         writer.writerow(row)
 
 
-def main() -> dict:
-    data_cfg = DatasetConfig(
-        csv_path=DATA_PATH,
-        window_size=WINDOW_SIZE,
-        step=STEP,
-    )
-    split_cfg = SplitConfig(n_blocks=N_BLOCKS, buffer=BUFFER)
+def run_experiment(
+    window_size: int = WINDOW_SIZE,
+    step: int = STEP,
+    n_blocks: int = N_BLOCKS,
+    buffer: int = BUFFER,
+    seed: int = SEED,
+) -> dict[str, object]:
+    """Run full EEG classification experiment and return structured results."""
+    data_cfg = DatasetConfig(csv_path=DATA_PATH, window_size=window_size, step=step)
+    split_cfg = SplitConfig(n_blocks=n_blocks, buffer=buffer)
     model_cfg = ModelConfig(
         rf_n_estimators=RF_PARAMS["n_estimators"],
         rf_max_depth=RF_PARAMS["max_depth"],
@@ -90,13 +94,15 @@ def main() -> dict:
     results = run_blocked_cv(X_features, yw, splits, model_cfg)
     rf_acc, rf_bal, mlp_acc, mlp_bal = summarize_results(results)
 
+    run_id = datetime.now().strftime("%Y%m%d_%H%M%S")  # noqa: DTZ005
+
     return {
-        "run_id": RUN_ID,
-        "seed": SEED,
-        "window_size": WINDOW_SIZE,
-        "step": STEP,
-        "n_blocks": N_BLOCKS,
-        "buffer": BUFFER,
+        "run_id": run_id,
+        "seed": seed,
+        "window_size": window_size,
+        "step": step,
+        "n_blocks": n_blocks,
+        "buffer": buffer,
         "rf_params": RF_PARAMS,
         "mlp_params": MLP_PARAMS,
         "n_windows": len(Xw),
@@ -108,7 +114,7 @@ def main() -> dict:
 
 
 if __name__ == "__main__":
-    result = main()
+    result = run_experiment()
     log_result(result)
     df = pd.read_csv(os.path.join(SCRIPT_DIR, "results_log.csv"))
     print(df.to_string(index=False))

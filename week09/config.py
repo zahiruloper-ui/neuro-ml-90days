@@ -23,7 +23,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-from datetime import datetime
+
 
 SEED = 42
 
@@ -48,10 +48,8 @@ MLP_PARAMS = {
     "random_state": SEED,
 }
 
-RUN_ID = datetime.now().strftime("%Y%m%d_%H%M%S")  # noqa: DTZ005
 
 if __name__ == "__main__":
-    print(f"RUN_ID: {RUN_ID}")
     print(f"SEED: {SEED}")
     print(f"DATA_PATH: {DATA_PATH}")
     print(f"WINDOW_SIZE: {WINDOW_SIZE}, STEP: {STEP}")
