@@ -117,8 +117,8 @@ def time_block_split(X_features: np.ndarray, y_windows: np.ndarray,
     return X_train, y_train, X_test, y_test
 
 
-from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix
+from sklearn.preprocessing import StandardScaler
 
 
 def train_and_evaluate(model, X_train, y_train, X_test, y_test, scale: bool = False):
@@ -159,8 +159,8 @@ def train_and_evaluate(model, X_train, y_train, X_test, y_test, scale: bool = Fa
     return results
 
 if __name__ == "__main__":
-    from sklearn.linear_model import LogisticRegression
     from sklearn.ensemble import RandomForestClassifier
+    from sklearn.linear_model import LogisticRegression
 
     URL = "https://raw.githubusercontent.com/datasets/eeg-eye-state/main/data/eeg-eye-state.csv"
     X, y = load_eeg_data(URL)

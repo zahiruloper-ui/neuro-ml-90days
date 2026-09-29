@@ -1,8 +1,8 @@
+import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier, plot_tree
-from sklearn.metrics import accuracy_score, classification_report
-import matplotlib.pyplot as plt
 
 # Load the Iris dataset
 df = pd.read_csv("week05/data.csv")

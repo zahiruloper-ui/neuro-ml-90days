@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
-from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, balanced_accuracy_score, confusion_matrix
+from sklearn.neural_network import MLPClassifier
+from sklearn.preprocessing import StandardScaler
 
 # --- Config -----------------------------------------------------------------
 WINDOW_SIZE = 128
@@ -112,7 +112,7 @@ for hidden in HIDDEN_CONFIGS:
             bal_acc = balanced_accuracy_score(y_test, y_pred_test)
 
             line = (
-                f"{str(hidden):>12} {act:>6} {mi:>9} "
+                f"{hidden!s:>12} {act:>6} {mi:>9} "
                 f"{train_acc:>10.3f} {test_acc:>10.3f} {bal_acc:>10.3f}"
             )
             print(line)

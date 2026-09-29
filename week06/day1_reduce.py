@@ -52,7 +52,7 @@ for i, var in enumerate(pca.explained_variance_ratio_, 1):
 
 # Cumulative variance
 cumulative_var = np.cumsum(pca.explained_variance_ratio_)
-print(f"\nCumulative variance explained:")
+print("\nCumulative variance explained:")
 for i, cum_var in enumerate(cumulative_var, 1):
     print(f"  Top {i} PCs: {cum_var:.4f} ({cum_var*100:.2f}%)")
 
@@ -99,6 +99,7 @@ for pc in range(5):
 
 # Save reduced data for Day 2 clustering
 import joblib
+
 joblib.dump(X_reduced, 'week6_X_reduced_5pc.joblib')
 joblib.dump(pca_5, 'week6_pca_model.joblib')
 print("\nSaved: week6_X_reduced_5pc.joblib (reduced data for clustering)")

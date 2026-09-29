@@ -1,6 +1,4 @@
 import pandas as pd
-import numpy as np
-
 
 df_str = pd.DataFrame({
     "name": ["Alice Smith", "Bob.Jones", "Carol-Lee", "David O'Connor"],

@@ -1,8 +1,7 @@
-import numpy as np
 from sklearn import datasets, linear_model
-from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import r2_score
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.preprocessing import StandardScaler
 
 # Load full diabetes dataset (all 10 features)
 diabetes = datasets.load_diabetes()

@@ -1,10 +1,11 @@
 import pickle
+
 import numpy as np
 from sklearn import datasets, linear_model
-from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
-from sklearn.metrics import r2_score
+from sklearn.preprocessing import StandardScaler
 
 # Load dataset
 diabetes = datasets.load_diabetes()

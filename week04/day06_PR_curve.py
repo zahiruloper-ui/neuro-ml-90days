@@ -1,8 +1,8 @@
-import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
+import pandas as pd
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import precision_recall_curve, average_precision_score
+from sklearn.metrics import average_precision_score, precision_recall_curve
+from sklearn.model_selection import train_test_split
 
 # Load dataset
 df = pd.read_csv('week04/data/parkinsons.data')

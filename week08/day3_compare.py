@@ -1,4 +1,4 @@
-"""
+r"""
 Week 8 - Day 3 (Compare): Blocked time-series CV for RF vs tuned MLP.
 
 Same EEG windowed features as Days 1–2. Instead of a single tail split,
@@ -11,10 +11,10 @@ Run from repo root:
 
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
-from sklearn.neural_network import MLPClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, balanced_accuracy_score, confusion_matrix
+from sklearn.neural_network import MLPClassifier
+from sklearn.preprocessing import StandardScaler
 
 # --- Config -----------------------------------------------------------------
 WINDOW_SIZE = 128

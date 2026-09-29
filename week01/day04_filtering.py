@@ -1,5 +1,5 @@
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 df = pd.DataFrame({
     "id": [101, 102, 103, 104, 105, 106, 107, 108],

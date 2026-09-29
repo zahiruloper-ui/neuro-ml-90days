@@ -1,5 +1,5 @@
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 # # Tiny dataset engineered to contain missing values + mixed types
 df = pd.DataFrame(
@@ -103,8 +103,6 @@ print(df0_typed)
 print("\nDTYPES:\n", df0_typed.dtypes)   #dtypes gives the data types of each column
 
 
-import pandas as pd
-import numpy as np
 
 df = pd.DataFrame(
     {

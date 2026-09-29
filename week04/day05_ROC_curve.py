@@ -1,8 +1,8 @@
-import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
+import pandas as pd
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import roc_curve, roc_auc_score
+from sklearn.metrics import roc_auc_score, roc_curve
+from sklearn.model_selection import train_test_split
 
 # Load dataset
 df = pd.read_csv('week04/data/parkinsons.data')

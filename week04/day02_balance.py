@@ -1,9 +1,9 @@
 
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import confusion_matrix, precision_score, recall_score
 import numpy as np
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import precision_score, recall_score
+from sklearn.model_selection import train_test_split
 
 # Load dataset
 df = pd.read_csv('week04/data/parkinsons.data')
@@ -28,7 +28,7 @@ print("\n=== Getting Probabilities ===")
 # Get probabilities (returns array of [prob_healthy, prob_pd])
 probabilities = model.predict_proba(X_valid)
 
-print(f"First 5 probability pairs:")
+print("First 5 probability pairs:")
 for i in range(5):
     prob_healthy = probabilities[i][0]
     prob_pd = probabilities[i][1]
@@ -87,8 +87,6 @@ print("So you'd choose threshold = 0.3")
 
 
 import matplotlib.pyplot as plt
-
-
 
 # --- TASK 4: Plot precision/recall across all thresholds ---
 print("\n=== Plotting Precision/Recall Curve ===")

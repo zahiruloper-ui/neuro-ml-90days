@@ -37,10 +37,10 @@ print("Overlapping samples between window 0 and window 1:", overlap_count)
 print("Fraction of window size that is overlap:", round(overlap_count / window_size, 3))
 
 
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix
+from sklearn.preprocessing import StandardScaler
 
 # --- Rebuild windows and features (same as Day 1/2) ---
 windows = []

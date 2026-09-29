@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
-from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.neural_network import MLPClassifier
+from sklearn.preprocessing import StandardScaler
 
 DATA_PATH = "https://raw.githubusercontent.com/datasets/eeg-eye-state/main/data/eeg-eye-state.csv"
 
@@ -83,13 +83,16 @@ print("MLP confusion matrix (test):")
 print(confusion_matrix(y_test, mlp.predict(X_test_s)))
 
 import numpy as np
-import pandas as pd
-from sklearn.preprocessing import StandardScaler
-from sklearn.neural_network import MLPClassifier
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.dummy import DummyClassifier
-from sklearn.metrics import (accuracy_score, balanced_accuracy_score,
-                             confusion_matrix, classification_report)
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import (
+    accuracy_score,
+    balanced_accuracy_score,
+    classification_report,
+    confusion_matrix,
+)
+from sklearn.neural_network import MLPClassifier
+from sklearn.preprocessing import StandardScaler
 
 DATA_URL = "https://raw.githubusercontent.com/datasets/eeg-eye-state/main/data/eeg-eye-state.csv"
 WINDOW_SIZE, STEP, TRAIN_FRAC, BUFFER, SEED = 128, 64, 0.8, 1, 42

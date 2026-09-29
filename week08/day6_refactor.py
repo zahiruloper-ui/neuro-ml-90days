@@ -1,13 +1,13 @@
 import numpy as np
 from eeg_pipeline import (
     DatasetConfig,
-    SplitConfig,
     ModelConfig,
-    load_eeg_dataset,
+    SplitConfig,
+    blocked_time_splits,
     create_sliding_windows,
     extract_features,
+    load_eeg_dataset,
     make_block_indices,
-    blocked_time_splits,
     run_blocked_cv,
     summarize_results,
 )

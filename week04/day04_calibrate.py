@@ -1,9 +1,8 @@
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.calibration import calibration_curve
-import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.calibration import calibration_curve
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
 
 # Load dataset
 df = pd.read_csv('week04/data/parkinsons.data')

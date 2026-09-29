@@ -1,10 +1,11 @@
-from sklearn import datasets, linear_model
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
-import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.linear_model import RANSACRegressor, LinearRegression
+import numpy as np
+from sklearn import datasets, linear_model
+from sklearn.linear_model import LinearRegression, RANSACRegressor
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
 # Load dataset
 diabetes = datasets.load_diabetes()
 X, y = diabetes.data, diabetes.target

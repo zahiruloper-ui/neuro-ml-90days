@@ -142,7 +142,7 @@ v = np.array([10, 20, 30])        # shape (3,)
 # --- Mismatch 1: trying to add col-wise but shape is wrong ---
 print("\n[Mismatch 1] A + v where we WANT col-wise addition:")
 print(f"  A.shape={A.shape}, v.shape={v.shape}") # (3,3) (3,)
-print(f"  NumPy treats v as (1,3) → adds to every ROW (probably not what you want)")
+print("  NumPy treats v as (1,3) → adds to every ROW (probably not what you want)")
 print(f"  Result (row-wise, may be unintended):\n{A + v}")
 
 # Fix: reshape v to (3,1) so it broadcasts down each column

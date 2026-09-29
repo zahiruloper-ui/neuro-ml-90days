@@ -1,6 +1,7 @@
 print("Day 1 ready")
 import math  # for math.sqrt [web:134]
 
+
 def mean(xs):
     if len(xs) == 0:  # len returns number of items 
         raise ValueError("mean() requires atleast one value") # raise throws an error, 

@@ -1,9 +1,14 @@
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score, precision_score, recall_score
 import matplotlib.pyplot as plt
-
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    ConfusionMatrixDisplay,
+    accuracy_score,
+    confusion_matrix,
+    precision_score,
+    recall_score,
+)
+from sklearn.model_selection import train_test_split
 
 # Load Parkinson's dataset
 df = pd.read_csv('week04/data/parkinsons.data')
@@ -64,7 +69,7 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_valid)
 
 print("\n=== Baseline Logistic Regression ===")
-print(f"Model trained successfully!")
+print("Model trained successfully!")
 print(f"First 5 predictions: {y_pred[:5]}")
 print(f"Actual first 5 values: {y_valid[:5].tolist()}")
 
@@ -92,7 +97,7 @@ y_pred = model.predict(X_valid)
 print("\n=== Confusion Matrix ===")
 cm = confusion_matrix(y_valid, y_pred)
 print(cm)
-print(f"\nBreakdown:")
+print("\nBreakdown:")
 print(f"True Negatives (healthy, predicted healthy): {cm[0, 0]}")
 print(f"False Positives (healthy, predicted PD): {cm[0, 1]}")
 print(f"False Negatives (PD, predicted healthy): {cm[1, 0]}")
@@ -123,7 +128,7 @@ print(f"Recall:    {recall:.3f} ({recall*100:.1f}%)")
 
 # Manual calculation (verify the formulas)
 tn, fp, fn, tp = cm[0, 0], cm[0, 1], cm[1, 0], cm[1, 1]
-print(f"\n=== Manual Verification ===")
+print("\n=== Manual Verification ===")
 print(f"Accuracy:  ({tn}+{tp})/{tn+tp+fn+fp} = {(tn+tp)/(tn+tp+fn+fp):.3f}")
 print(f"Precision: {tp}/({tp}+{fp}) = {tp/(tp+fp):.3f}")
 print(f"Recall:    {tp}/({tp}+{fn}) = {tp/(tp+fn):.3f}")
@@ -133,4 +138,4 @@ print("\n=== Interpretation ===")
 print(f"• Out of {len(y_valid)} validation samples, {int(accuracy*len(y_valid))} were correct")
 print(f"• When predicting PD, you're {precision*100:.1f}% right (not many false alarms)")
 print(f"• You catch {recall*100:.1f}% of actual PD cases (good — low false negatives)")
-print(f"• For medical screening: This is a GOOD balance (high recall = don't miss patients)")
+print("• For medical screening: This is a GOOD balance (high recall = don't miss patients)")

@@ -52,7 +52,7 @@ correct = (y_pred_tb == y_test_tb)
 
 print(f"{'TestIdx':>8} {'WinIdx':>7} {'True':>5} {'Pred':>5} {'Correct':>8}")
 for i, win_idx in enumerate(test_idx):
-    print(f"{i:>8} {win_idx:>7} {y_test_tb[i]:>5} {y_pred_tb[i]:>5} {str(correct[i]):>8}")
+    print(f"{i:>8} {win_idx:>7} {y_test_tb[i]:>5} {y_pred_tb[i]:>5} {correct[i]!s:>8}")
 
 print("\nTotal test windows:", len(test_idx))
 print("Total errors:", (~correct).sum())

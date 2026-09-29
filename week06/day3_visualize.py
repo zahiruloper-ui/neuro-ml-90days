@@ -1,7 +1,6 @@
 # week6_day3_visualize.py
-import numpy as np
-import matplotlib.pyplot as plt
 import joblib
+import matplotlib.pyplot as plt
 
 # Task 1: Load reduced data and cluster labels
 print("Loading reduced EEG data (5 PCs) and cluster labels...")

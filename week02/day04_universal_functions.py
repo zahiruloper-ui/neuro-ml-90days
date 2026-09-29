@@ -1,5 +1,6 @@
+import time  # Used to measure how long code takes to ru
+
 import numpy as np
-import time    # Used to measure how long code takes to ru
 
 arr = np.array([-4.0, 0.0, 9.0, 16.0, 25.0])
 
@@ -39,7 +40,7 @@ print(f"Ufunc time: {ufunc_time:.4f}s")
 if ufunc_time > 0:
     print(f"Speedup:    {loop_time / ufunc_time:.1f}x faster")
 else:
-    print(f"Speedup:    >1000x faster (ufunc too fast to measure!)")
+    print("Speedup:    >1000x faster (ufunc too fast to measure!)")
 
 # ── TASK 2: exp + log ──────────────────────────────────────────
 

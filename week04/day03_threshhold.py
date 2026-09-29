@@ -1,8 +1,13 @@
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import confusion_matrix, precision_score, recall_score, accuracy_score
 import numpy as np
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    accuracy_score,
+    confusion_matrix,
+    precision_score,
+    recall_score,
+)
+from sklearn.model_selection import train_test_split
 
 # Load dataset
 df = pd.read_csv('week04/data/parkinsons.data')
@@ -118,7 +123,4 @@ print(f"Recall:    {recall_score(y_valid, pred_oversampled):.3f}")
 print("\n=== Comparison ===")
 print("Plain model:         Precision=0.900, Recall=0.931")
 print("Balanced model:      Precision=0.913, Recall=0.724")
-print("Oversampled model:  Precision={:.3f}, Recall={:.3f}".format(
-    precision_score(y_valid, pred_oversampled),
-    recall_score(y_valid, pred_oversampled)
-))
+print(f"Oversampled model:  Precision={precision_score(y_valid, pred_oversampled):.3f}, Recall={recall_score(y_valid, pred_oversampled):.3f}")
